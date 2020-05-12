@@ -13,7 +13,9 @@ class MyCal extends StatefulWidget {
 class _MyCalState extends State<MyCal> {
   TextEditingController fnum=TextEditingController();
   TextEditingController snum=TextEditingController();
-  int _a=0,_b=0,_c=0;
+  int _a=0;
+  int _b=0;
+  int _c=0;
   void _add()
   {
     setState(() {
@@ -37,15 +39,18 @@ class _MyCalState extends State<MyCal> {
   void _div()
   {
     setState(() {
-     // _c=_a/(_b);
+      _c=_a~/_b;
     });
   }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner:false ,
+
       home: Scaffold(
+
         body: Container(
+          margin: EdgeInsets.all(20.0),
           decoration: BoxDecoration(
             //image: DecorationImage(image: AssetImage(assetName))
           ),
@@ -95,7 +100,28 @@ class _MyCalState extends State<MyCal> {
                       }
                       ),
                       SizedBox(height: 15,),
-                      
+                      RaisedButton(
+                          child: Text("Multiply"),
+                          onPressed: ()
+                      {
+                        _a=int.parse(fnum.text);
+                        _b=int.parse(snum.text);
+                        _mul();
+                      }
+                      ),
+                      SizedBox(height: 15,),
+                      RaisedButton(
+                          child: Text("Divide"),
+                          onPressed: ()
+                      {
+                        _a=int.parse(fnum.text);
+                        _b=int.parse(snum.text);
+                        _div();
+                      }
+                      ),
+                      Text("The answer is:",style: TextStyle(fontSize: 40.0),),
+                      Text(_c.toString(),style:TextStyle(fontSize: 50.0,))
+
                     ],
                   )
               ),
